@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
+		<title>CG Lab0 <3</title>
+
+		<!-- vertex shader code block -->
+		<script id="vertex-shader" type="x-shader/x-vertex">
+			// READ THESE COMMENTS AFTER READING THE JS COMMENTS!!!!
+			// attribute means that it is an array containing the information 
+			// about EVERY point of the object.
+			// attribute was passed from the javascript file
+			attribute vec4 vPosition;
+			attribute vec4 vColor;
+			
+			uniform mat4 modelViewMatrix;
+			uniform mat4 projectionMatrix;
+			
+			uniform vec3 theta;
+			uniform vec3 trCoeff;
+			
+			// varying means that we will pass this data to fragment shader
+			// this data was NOT passed from the JS file.
+			varying vec4 fColor;
+
+			void
+			main() {
+				vec3 angles = radians(theta);
+				vec3 c = cos(angles);
+				vec3 s = sin(angles);
+				// not doing any transformations, just taking the position that came 
+				// from the JS file and applying it to gl_Position which is the FINAL position.
+				
+				mat4 rx = mat4(1.0, 0.0, 0.0, 0.0, 
+						0.0, c.x, s.x, 0.0, 
+						0.0, -s.x, c.x, 0.0,
+						0.0, 0.0, 0.0, 1.0 );
+						
+				mat4 ry = mat4(c.y, 0.0, -s.y, 0.0, 
+						0.0, 1.0, 0.0, 0.0, 
+						s.y, 0.0, c.y, 0.0,
+						0.0, 0.0, 0.0, 1.0 );
+						
+				mat4 rz = mat4(c.z, s.z, 0.0, 0.0, 
+						-s.z, c.z, 0.0, 0.0, 
+						0.0, 0.0, 1.0, 0.0,
+						0.0, 0.0, 0.0, 1.0 );
+						
+				mat4 tr = mat4(1, 0, 0, 0, 
+						0, 1, 0, 0, 
+						0, 0, 1, 0,
+						trCoeff.x, trCoeff.y, trCoeff.z, 1 );
+						
+				mat4 sc = mat4(0.5, 0, 0, 0, //2 multiply
+						0, 0.5, 0, 0, 
+						0, 0, 0.5, 0,
+						0, 0, 0, 1 );
+				
+			    gl_Position = projectionMatrix * modelViewMatrix * tr * rz * ry * rx * sc * vPosition;
+
+			    // assigning vColor that was passed from JS to fColor that WILL be passed to fragment shader
+				fColor = vColor;
+			}
+		</script>
+
+		<!-- fragment shader code block -->
+		<script id="fragment-shader" type="x-shader/x-fragment">
+			precision mediump float;
+
+			// READ THESE COMMENTS AFTER READING THE JS COMMENTS!!!!
+			// in order to work, varying must be declared in both shaders
+			varying vec4 fColor;
+			void
+			main() {
+				// no transformations of color, just take it as it came from the v-shader
+				// gl_FragColor is the FINAL color!!!
+			    gl_FragColor = fColor;
+			}
+		</script>
+
+		<!-- including all scripts needed -->
+		<script type="text/javascript" src="webgl-utils.js"></script>
+		<script type="text/javascript" src="initShaders.js"></script>
+		<script type="text/javascript" src="MV.js"></script>
+		<script type="text/javascript" src="app.js"></script>
+	</head>
+
+	<body>
+		<!-- canvas element with size attributes!! -->
+		<canvas id="gl-canvas" width="800" height="800">
+		Oops ... your browser doesn't support the HTML5 canvas element
+		</canvas>
+		</br>
+		<!-- <input type = "range" min = "-3" max = "3" value = "0" id = "moveX"> -->
+	</body>
+</html>
