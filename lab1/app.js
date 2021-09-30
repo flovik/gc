@@ -30,21 +30,9 @@ var trCoeffLoc;
 var canvas;
 var gl;
 var program;
-var CubeObject;
-var CubeObject2;
-var ConeObject1;
-var CubeObject3;
-var TriangleObject;
-var Cube;
 var objectsArray = [];
 var translation = [-1, 0, 0];
     // initialization of the data arrays!!!!
-var triangleVertices = [
-        vec3( -0.5, -0.5, 0.0 ), // every vec3 stores 3 coordinates for one point
-        vec3(  0,    0.5, 0.0 ),
-        vec3(  0.5, -0.5, 0.0 )
-];
-
 
 var CubeVertices = [
 		vec3( -0.5, -0.5,  0.5),//0
@@ -89,7 +77,7 @@ var CubeVertices = [
 		vec3( -0.5, -0.5, -0.5),
 		vec3( -0.5,  0.5, -0.5)
 ];
-
+var idForObjects = 0;
 var cone_vals = [];
 var ConeVertices = [];
 var n = 360;
@@ -97,10 +85,29 @@ var r = 1;
 var h = 1;
 window.onload = init; // CALL INIT AFTER THE PAGE (all html body) HAS BEEN LOADED!!!!
 
+function addElement(){
+	//adds a new option to the scene button
+	var select = document.getElementById("list");
+	select.options[select.options.length] = new Option(objectsArray[objectsArray.length - 1].name, (idForObjects - 1));
+	console.log(select);
+}
 
+function deleteOption(){
+	//deletes the option from html page
+	var select= document.getElementById("list");
+	var i;
+	console.log(select);
+	for(i = 0; i < select.options.length; i++){
+		if(select.options[i].selected)
+			select.remove(i);
+	}
+	console.log(objectsArray);
+	//deletes the object from array of objects
+	objectsArray.splice(i - 1, 1);
+}
 class Drawable {
-	
-	constructor(vertices, program){
+	constructor(vertices, program, name){
+		this.name = name;
 		this.program = program;
 		this.vertices = vertices;
 		
@@ -115,7 +122,6 @@ class Drawable {
 		var rand_color = vec3(Math.floor(Math.random() * 256) / 256, Math.floor(Math.random() * 256) / 256, Math.floor(Math.random() * 256) / 256);
 		for(i = 0; i < this.vertices.length; i++){
 			this.colors.push(vec4(rand_color, 1.0));
-			
 		}
 		
 		
@@ -141,12 +147,18 @@ class Drawable {
 		
         gl.drawArrays(gl.TRIANGLES, 0, this.vertices.length);
 	}
-	
-	
 }
 
-function initCone() {
-	
+function addCube() {
+	let name = "Cube" + (idForObjects++);
+
+	var Cube = new Drawable(CubeVertices, program, name);
+	objectsArray.push(Cube);
+	addElement();
+	console.log(objectsArray);
+}
+
+function addCone() {
 	for(var i = 0; i < n; i++){
 		cone_vals.push(vec3(r * Math.sin(i * Math.PI / 180), r * Math.cos(i * Math.PI / 180), 0));
 	}
@@ -170,6 +182,12 @@ function initCone() {
 	ConeVertices.push(cone_vals[359]);
 	ConeVertices.push(cone_vals[0]);
 	ConeVertices.push(vec3(0,0,1));
+
+	let name = "Cone" + (idForObjects++);
+
+	var ConeObject = new Drawable(ConeVertices, program, name);
+	objectsArray.push(ConeObject);
+	addElement();
 }
 
 function init() {    
@@ -201,27 +219,13 @@ function init() {
 	gl.uniformMatrix4fv(projectionMatrixLoc, false, flatten(projectionMatrix));
 	
 	trCoeff = [0, 0, 0];
-	/*
-	document.getElementById("moveX").oninput = function() {
-		trCoeff[0] = this.value;
-	}*/
-	
-
-
-	initCone();
-	Cube = new Drawable(CubeVertices, program);
-	ConeObject1 = new Drawable(ConeVertices, program);
-	objectsArray.push(Cube);
-	objectsArray.push(ConeObject1);
 
 	//translate cube
-	console.log(Cube.vertices);
-	for(var i = 0; i < Cube.vertices.length; i++){
-		Cube.vertices[i][0] += 2.5;
-	}
+	//console.log(Cube.vertices);
+	//for(var i = 0; i < Cube.vertices.length; i++){
+	//	Cube.vertices[i][0] += 2.5;
+	//}
 	
-	
-
     render();
 };
 

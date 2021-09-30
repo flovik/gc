@@ -83,6 +83,58 @@
 		<script type="text/javascript" src="initShaders.js"></script>
 		<script type="text/javascript" src="MV.js"></script>
 		<script type="text/javascript" src="app.js"></script>
+		
+
+		<!-- css code here-->
+		<style>
+			#list {
+				padding: 0;
+				position: relative;
+				left: 1300px;
+				bottom: 800px;	
+			}
+
+			#scene {
+				padding: 0;
+				position: relative;
+				left: 1300px;
+				bottom: 800px;
+				
+			}
+
+			#cube {
+				padding: 0;
+				position: relative;
+				left: 850px;
+				bottom: 800px;
+				width: 90px;
+				height: 30px;
+				margin: 5px;
+			}
+
+			#cone {
+				padding: 0;
+				position: relative;
+				left: 870px;
+				bottom: 800px;
+				width: 90px;
+				height: 30px;
+				margin: 5px;
+			}
+
+			#delete {
+				padding: 0;
+				position: relative;
+				left: 1570px;
+				bottom: 800px;
+				width: 90px;
+				height: 30px;
+				
+			}
+
+
+
+		</style>
 	</head>
 
 	<body>
@@ -91,6 +143,17 @@
 		Oops ... your browser doesn't support the HTML5 canvas element
 		</canvas>
 		</br>
+		
+		<button id="cube" name="cube" type="button" onclick="addCube();">Add cube</button>
+		<button id="cone" name="cone" type="button" onclick="addCone();">Add cone</button>
+		<button id="delete" name = "delete" type = "button" onclick = "deleteOption();">Delete object</button>
+		<label id="scene" for="list_elements">Scene: </label>
+		<select name="list_elements" id = "list">scene
+			
+		</select>
+		
+
+
 		<!-- <input type = "range" min = "-3" max = "3" value = "0" id = "moveX"> -->
 	</body>
 </html>
