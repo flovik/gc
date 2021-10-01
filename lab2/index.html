@@ -17,6 +17,7 @@
 			
 			uniform vec3 theta;
 			uniform vec3 trCoeff;
+			uniform vec3 sc;
 			
 			// varying means that we will pass this data to fragment shader
 			// this data was NOT passed from the JS file.
@@ -48,9 +49,9 @@
 						0, 0, 1, 0,
 						trCoeff.x, trCoeff.y, trCoeff.z, 1 );
 						
-				mat4 sc = mat4(0.5, 0, 0, 0, //2 multiply
-						0, 0.5, 0, 0, 
-						0, 0, 0.5, 0,
+				mat4 sc = mat4(sc.x, 0, 0, 0, 
+						0, sc.y, 0, 0, 
+						0, 0, sc.z, 0,
 						0, 0, 0, 1 );
 				
 			    gl_Position = projectionMatrix * modelViewMatrix * tr * rz * ry * rx * sc * vPosition;
@@ -285,9 +286,9 @@
 		<button id="rotateY" name="rotateY" type="button" onclick="rotateY();">Rotate Y</button>
 		<button id="rotateZ" name="rotateZ" type="button" onclick="rotateZ();">Rotate Z</button>
 		<button id="stopRotation" name="stopRotation" type="button" onclick="stopRotation();">Stop Rotation</button>
-		<input type="range" min="-3" max="3" value="0" step="0.05" class="slider" id="scaleX" onchange="scaleX(this.value);">
-		<input type="range" min="-3" max="3" value="0" step="0.05" class="slider" id="scaleY" onchange="scaleY(this.value);">
-		<input type="range" min="-3" max="3" value="0" step="0.05" class="slider" id="scaleZ" onchange="scaleZ(this.value);">
+		<input type="range" min="0.1" max="3" value="0.5" step="0.02" class="slider" id="scaleX" onchange="scaleX(this.value);">
+		<input type="range" min="0.1" max="3" value="0.5" step="0.02" class="slider" id="scaleY" onchange="scaleY(this.value);">
+		<input type="range" min="0.1" max="3" value="0.5" step="0.02" class="slider" id="scaleZ" onchange="scaleZ(this.value);">
 		<label id="scene" for="list_elements">Scene: </label>
 		<select name="list_elements" id = "list">scene</select>
 		<p id = "moveX_text">Move X</p>

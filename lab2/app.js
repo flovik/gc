@@ -78,6 +78,21 @@ function rotateZ() {
 	val.axis = 2;
 }
 
+function scaleX(value){
+	var val = getObject();
+	val.sc[0] = value;
+}
+
+function scaleY(value){
+	var val = getObject();
+	val.sc[1] = value;
+}
+
+function scaleZ(value){
+	var val = getObject();
+	val.sc[2] = value;
+}
+
 function stopRotation() {
 	var val = getObject();
 	val.enableRotation = false;
@@ -210,6 +225,7 @@ class Drawable {
 		this.theta = [0, 0, 0];
 		this.enableRotation = false;
 		this.axis = 0;
+		this.sc = [0.5, 0.5, 0.5];
 		//position
 		this.vBuffer = gl.createBuffer();
 		gl.bindBuffer(gl.ARRAY_BUFFER, this.vBuffer);
@@ -225,6 +241,7 @@ class Drawable {
 		
 		this.trCoeffLoc = gl.getUniformLocation(program, "trCoeff");
 		this.thetaLoc = gl.getUniformLocation(program, "theta");
+		this.scLoc = gl.getUniformLocation(program, "sc");
 		//color 
 		this.colorBuffer = gl.createBuffer();
 		gl.bindBuffer(gl.ARRAY_BUFFER, this.colorBuffer);
@@ -253,6 +270,7 @@ class Drawable {
 
 		gl.uniform3fv(this.trCoeffLoc, this.trCoeff);
 		gl.uniform3fv(this.thetaLoc, this.theta);
+		gl.uniform3fv(this.scLoc, this.sc);
         gl.drawArrays(gl.TRIANGLES, 0, this.vertices.length);
 	}
 }
