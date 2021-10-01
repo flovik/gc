@@ -18,7 +18,6 @@ var xAxis = 0;
 var yAxis = 1;
 var zAxis = 2;
 
-var axis = 0;
 var thetaRot = [0,0,0];
 var thetaLoc;
 
@@ -31,6 +30,15 @@ var objectsArray = [];
 var idForObjects = 0;
 window.onload = init; // CALL INIT AFTER THE PAGE (all html body) HAS BEEN LOADED!!!!
 
+function getObject() {
+	//move an object by the range slider value
+	//search the name from the select-option
+	for(var i = 0; i < objectsArray.length; i++){//search for it in the objectsArray
+		if(objectsArray[i].name === document.getElementById("list").options[document.getElementById("list").selectedIndex].value)//assign that value to trCoeff of an object
+			return objectsArray[i];	
+	}
+}
+
 function addElement(){
 	//adds a new option to the scene button
 	var select = document.getElementById("list");
@@ -38,34 +46,41 @@ function addElement(){
 }
 
 function moveX(value){
-	//move an object by the range slider value
-	var select = document.getElementById("list"); //search the name from the select-option
-	var val = select.options[select.selectedIndex].value;
-	for(var i = 0; i < objectsArray.length; i++){
-		if(objectsArray[i].name === val){ //search for it in the objectsArray
-			objectsArray[i].trCoeff[0] = value; //assign that value to trCoeff of an object
-		}
-	}
+	var val = getObject();
+	val.trCoeff[0] = value; 
 }
 
 function moveY(value){
-	var select = document.getElementById("list");
-	var val = select.options[select.selectedIndex].value;
-	for(var i = 0; i < objectsArray.length; i++){
-		if(objectsArray[i].name === val){
-			objectsArray[i].trCoeff[1] = value;
-		}
-	}
+	var val = getObject();
+	val.trCoeff[1] = value;
 }
 
 function moveZ(value){
-	var select = document.getElementById("list");
-	var val = select.options[select.selectedIndex].value;
-	for(var i = 0; i < objectsArray.length; i++){
-		if(objectsArray[i].name === val){
-			objectsArray[i].trCoeff[2] = value;
-		}
-	}
+	var val = getObject();
+	val.trCoeff[2] = value;
+}
+
+function rotateX() {
+	var val = getObject();
+	val.enableRotation = true;
+	val.axis = 0;
+}
+
+function rotateY() {
+	var val = getObject();
+	val.enableRotation = true;
+	val.axis = 1;
+}
+
+function rotateZ() {
+	var val = getObject();
+	val.enableRotation = true;
+	val.axis = 2;
+}
+
+function stopRotation() {
+	var val = getObject();
+	val.enableRotation = false;
 }
 
 function deleteOption(){
@@ -192,6 +207,9 @@ class Drawable {
 		this.program = program;
 		this.vertices = vertices;
 		this.trCoeff = [0, 0, 0];
+		this.theta = [0, 0, 0];
+		this.enableRotation = false;
+		this.axis = 0;
 		//position
 		this.vBuffer = gl.createBuffer();
 		gl.bindBuffer(gl.ARRAY_BUFFER, this.vBuffer);
@@ -206,7 +224,7 @@ class Drawable {
 		}
 		
 		this.trCoeffLoc = gl.getUniformLocation(program, "trCoeff");
-		
+		this.thetaLoc = gl.getUniformLocation(program, "theta");
 		//color 
 		this.colorBuffer = gl.createBuffer();
 		gl.bindBuffer(gl.ARRAY_BUFFER, this.colorBuffer);
@@ -227,8 +245,14 @@ class Drawable {
 		gl.enableVertexAttribArray(this.cAttributeLocation);
 		gl.vertexAttribPointer(this.cAttributeLocation, 4, gl.FLOAT, false, 0, 0 );
 		
-		gl.uniform3fv(this.trCoeffLoc, this.trCoeff);
+		//at render it will rotate the cube at each frame, when the rotate button is pressed the enable Rotation goes to true and changes the theta by the value
+		//from the pressed button (x, y or z)
+		if(this.enableRotation){
+			this.theta[this.axis] += 2;
+		}
 
+		gl.uniform3fv(this.trCoeffLoc, this.trCoeff);
+		gl.uniform3fv(this.thetaLoc, this.theta);
         gl.drawArrays(gl.TRIANGLES, 0, this.vertices.length);
 	}
 }
@@ -251,8 +275,6 @@ function init() {
 	modelViewMatrixLoc = gl.getUniformLocation(program, "modelViewMatrix");
 	projectionMatrixLoc = gl.getUniformLocation(program, "projectionMatrix");
 	
-	thetaLoc = gl.getUniformLocation(program, "theta");
-	
 	eye = vec3(radius * Math.sin(theta) * Math.cos(phi), 
 		radius * Math.sin(theta) * Math.sin(phi), radius * Math.cos(theta));
 	modelViewMatrix = lookAt(eye, at, up);
@@ -265,9 +287,6 @@ function init() {
 };
 function render() {
     gl.clear( gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT); 
-	
-	//thetaRot[axis] += 0.5;
-	//gl.uniform3fv(thetaLoc, thetaRot);
 	
 	gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(modelViewMatrix));
 	gl.uniformMatrix4fv(projectionMatrixLoc, false, flatten(projectionMatrix));

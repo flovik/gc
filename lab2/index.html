@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
-		<title>GC Lab1 <3</title>
+		<title>GC Lab2 <3</title>
 
 		<!-- vertex shader code block -->
 		<script id="vertex-shader" type="x-shader/x-vertex">
@@ -184,6 +184,84 @@
 				margin: 5px;
 			}
 
+			#rotateX {
+				position: absolute;
+				left: 1010px;
+				bottom: 800px;
+				width: 90px;
+				height: 30px;
+				margin: 5px;
+			}
+			#rotateY {
+				position: absolute;
+				left: 1010px;
+				bottom: 760px;
+				width: 90px;
+				height: 30px;
+				margin: 5px;
+			}
+			#rotateZ {
+				position: absolute;
+				left: 1010px;
+				bottom: 720px;
+				width: 90px;
+				height: 30px;
+				margin: 5px;
+			}
+
+			#stopRotation {
+				padding: 0;
+				position: absolute;
+				left: 1010px;
+				bottom: 680px;
+				width: 90px;
+				height: 30px;
+				margin: 5px;
+			}
+			#scaleX {
+				position: absolute;
+				left: 1210px;
+				bottom: 800px;
+				width: 90px;
+				height: 30px;
+				margin: 5px;
+			}
+			#scaleY {
+				position: absolute;
+				left: 1210px;
+				bottom: 770px;
+				width: 90px;
+				height: 30px;
+				margin: 5px;
+			}
+			#scaleZ {
+				position: absolute;
+				left: 1210px;
+				bottom: 740px;
+				width: 90px;
+				height: 30px;
+				margin: 5px;
+			}
+
+			#scaleX_text{
+				position: absolute;
+				left: 1150px;
+				bottom: 806px;
+				margin: 5px;
+			}
+			#scaleY_text{
+				position: absolute;
+				left: 1150px;
+				bottom: 776px;
+				margin: 5px;
+			}
+			#scaleZ_text{
+				position: absolute;
+				left: 1150px;
+				bottom: 746px;
+				margin: 5px;
+			}
+
 
 		</style>
 	</head>
@@ -203,10 +281,21 @@
 		<input type="range" min="-3" max="3" value="0" step="0.05" class="slider" id="moveX" onchange="moveX(this.value);">
 		<input type="range" min="-3" max="3" value="0" step="0.05" class="slider" id="moveY" onchange="moveY(this.value);">
 		<input type="range" min="-3" max="3" value="0" step="0.05" class="slider" id="moveZ" onchange="moveZ(this.value);">
+		<button id="rotateX" name="rotateX" type="button" onclick="rotateX();">Rotate X</button>
+		<button id="rotateY" name="rotateY" type="button" onclick="rotateY();">Rotate Y</button>
+		<button id="rotateZ" name="rotateZ" type="button" onclick="rotateZ();">Rotate Z</button>
+		<button id="stopRotation" name="stopRotation" type="button" onclick="stopRotation();">Stop Rotation</button>
+		<input type="range" min="-3" max="3" value="0" step="0.05" class="slider" id="scaleX" onchange="scaleX(this.value);">
+		<input type="range" min="-3" max="3" value="0" step="0.05" class="slider" id="scaleY" onchange="scaleY(this.value);">
+		<input type="range" min="-3" max="3" value="0" step="0.05" class="slider" id="scaleZ" onchange="scaleZ(this.value);">
 		<label id="scene" for="list_elements">Scene: </label>
 		<select name="list_elements" id = "list">scene</select>
 		<p id = "moveX_text">Move X</p>
 		<p id = "moveY_text">Move Y</p>
 		<p id = "moveZ_text">Move Z</p>
+		<p id = "scaleX_text">Scale X</p>
+		<p id = "scaleY_text">Scale Y</p>
+		<p id = "scaleZ_text">Scale Z</p>
+		
 	</body>
 </html>
