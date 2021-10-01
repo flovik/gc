@@ -266,6 +266,9 @@ function init() {
 function render() {
     gl.clear( gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT); 
 	
+	//thetaRot[axis] += 0.5;
+	//gl.uniform3fv(thetaLoc, thetaRot);
+	
 	gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(modelViewMatrix));
 	gl.uniformMatrix4fv(projectionMatrixLoc, false, flatten(projectionMatrix));
     for(var i = 0; i < objectsArray.length; i++){
