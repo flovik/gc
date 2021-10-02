@@ -96,36 +96,47 @@
 		<button id="delete" name = "delete" type = "button" onclick = "deleteOption();">Delete object</button>
 		<!-- value of range slider is passed into the function, where it is used to change the position of vertices-->
 		<input type="range" min="-3" max="3" value="0" step="0.1" class="slider" id="moveX" onchange="moveX(this.value);">
+		<span id="movex_value" style="color:red;"></span>
 		<input type="range" min="-3" max="3" value="0" step="0.1" class="slider" id="moveY" onchange="moveY(this.value);">
+		<span id="movey_value" style="color:red;"></span>
 		<input type="range" min="-3" max="3" value="0" step="0.1" class="slider" id="moveZ" onchange="moveZ(this.value);">
+		<span id="movez_value" style="color:red;"></span>
 		<button id="rotateX" name="rotateX" type="button" onclick="rotateX();">Rotate X</button>
 		<button id="rotateY" name="rotateY" type="button" onclick="rotateY();">Rotate Y</button>
 		<button id="rotateZ" name="rotateZ" type="button" onclick="rotateZ();">Rotate Z</button>
 		<button id="stopRotation" name="stopRotation" type="button" onclick="stopRotation();">Stop Rotation</button>
 		<input type="range" min="0.1" max="3" value="0.5" step="0.02" class="slider" id="scaleX" onchange="scaleX(this.value);">
+		<span id="scalex_value" style="color:red;"></span>
 		<input type="range" min="0.1" max="3" value="0.5" step="0.02" class="slider" id="scaleY" onchange="scaleY(this.value);">
+		<span id="scaley_value" style="color:red;"></span>
 		<input type="range" min="0.1" max="3" value="0.5" step="0.02" class="slider" id="scaleZ" onchange="scaleZ(this.value);">
+		<span id="scalez_value" style="color:red;"></span>
 
 
-		<input type="range" min="0.01" max="3" value="1" step="0.01" class="slider" id="zNear" onchange="zNear(this.value);">
-		<label id="zNearText" for = "zNear">zNear</label>
-		<input type="range" min="3" max="9" value="3" step="3" class="slider" id="zFar" onchange="zFar(this.value);">
-		<label id="zFarText" for = "zFar">zFar</label>
-		
+		<button id="increaseZNear" name="increaseZNear" type="button" onclick="increaseZNear();">Increase zNear</button>
+		<button id="decreaseZNear" name="decreaseZNear" type="button" onclick="decreaseZNear();">Decrease zNear</button>
+		<button id="increaseZFar" name="increaseZFar" type="button" onclick="increaseZFar();">Increase zFar</button>
+		<button id="decreaseZFar" name="decreaseZFar" type="button" onclick="decreaseZFar();">Decrease zFar</button>
+	
 		<input type="range" min="0.05" max="10" value="3" step="0.1" class="slider" id="radius" onchange="Radius(this.value);">
 		<label id="radiusText" for = "radius">radius</label>
+		<span id="radius_value" style="color:red;"></span>
 
 		<input type="range" min="-180" max="180" value="0" step="5" class="slider" id="theta" onchange="Theta(this.value);">
 		<label id="thetaText" for = "theta">theta</label>
+		<span id="theta_value" style="color:red;"></span>
 
 		<input type="range" min="-90" max="90" value="0" step="5" class="slider" id="phi" onchange="Phi(this.value);">
 		<label id="phiText" for = "phi">phi</label>
+		<span id="phi_value" style="color:red;"></span>
 
 		<input type="range" min="10" max="120" value="65" step="5" class="slider" id="fov" onchange="Fov(this.value);">
 		<label id="fovText" for = "fov">fov</label>
+		<span id="fov_value" style="color:red;"></span>
 
 		<input type="range" min="0.5" max="2" value="1" step="0.1" class="slider" id="aspect" onchange="Aspect(this.value);">
 		<label id="aspectText" for = "aspect">aspect</label>
+		<span id="aspect_value" style="color:red;"></span>
 
 
 		<label id="scene" for="list_elements">Scene: </label>
@@ -136,6 +147,10 @@
 		<p id = "scaleX_text">Scale X</p>
 		<p id = "scaleY_text">Scale Y</p>
 		<p id = "scaleZ_text">Scale Z</p>
+		<p id = "zFarText">zFar: </p>
+		<span id="zFar_value" style="color:red;"></span>
+		<p id = "zNearText">zNear: </p>
+		<span id="zNear_value" style="color:red;"></span>
 		
 	</body>
 </html>

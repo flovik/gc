@@ -1,6 +1,6 @@
 "use strict"; 
-var near = 1.0;
-var far = 4.0;
+var near = 1;
+var far = 4;
 var radius = 3.0;
 var theta = 0.0; 
 var phi = 0.0;
@@ -39,17 +39,19 @@ function addElement(){
 function moveX(value){
 	var val = getObject();
 	val.trCoeff[0] = value; 
+	document.getElementById("movex_value").innerHTML = value;
 }
 
 function moveY(value){
 	var val = getObject();
 	val.trCoeff[1] = value;
+	document.getElementById("movey_value").innerHTML = value;
 }
 
 function moveZ(value){
 	var val = getObject();
 	val.trCoeff[2] = value;
-	console.log("zval" + value);
+	document.getElementById("movez_value").innerHTML = value;
 }
 
 function rotateX() {
@@ -73,51 +75,73 @@ function rotateZ() {
 function scaleX(value){
 	var val = getObject();
 	val.sc[0] = value;
+	document.getElementById("scalex_value").innerHTML = value;
 }
 
 function scaleY(value){
 	var val = getObject();
 	val.sc[1] = value;
+	document.getElementById("scaley_value").innerHTML = value;
 }
 
 function scaleZ(value){
 	var val = getObject();
 	val.sc[2] = value;
+	document.getElementById("scalez_value").innerHTML = value;
 }
 
-function zNear(value){ 
+function increaseZNear(value){ 
 	//from where camera starts to see the scene
-	near = value;
+	near += 0.2;
+	document.getElementById("zNear_value").innerHTML = near.toFixed(1);
 }
 
-function zFar(value){
+function decreaseZNear(value){ 
+	//from where camera starts to see the scene
+	near -= 0.2;
+	document.getElementById("zNear_value").innerHTML = near.toFixed(1);
+}
+
+function increaseZFar(){
 	//the furthest point where the camera can see
-	far = value;
+	far += 0.2;
+	document.getElementById("zFar_value").innerHTML = far.toFixed(1);
+}
+
+function decreaseZFar(){
+	//the furthest point where the camera can see
+	far -= 0.2;
+	document.getElementById("zFar_value").innerHTML = far.toFixed(1);
 }
 
 function Radius(value){
 	//how far is the camera from the center of the scene
 	radius = value;
+	document.getElementById("radius_value").innerHTML = value;
 }
 
 function Theta(value){
 	//moves the camera to left or right
 	theta = value * Math.PI / 180.0;
+	document.getElementById("theta_value").innerHTML = value;
 }
 
 function Phi(value){
 	//how high or low the camera is from the ground, like goes up or down
 	phi = value * Math.PI / 180.0;
+	document.getElementById("phi_value").innerHTML = value;
 }
 
 function Fov(value){
 	//how wide you can see the scene
 	fov = value;
+	document.getElementById("fov_value").innerHTML = value;
 }
 
 function Aspect(value){
 	//width/height
 	aspect = value;
+	document.getElementById("aspect_value").innerHTML = value;
 }
 
 
@@ -323,13 +347,12 @@ function init() {
 	projectionMatrixLoc = gl.getUniformLocation(program, "projectionMatrix");
 	
 	eye = vec3(radius * Math.sin(theta) * Math.cos(phi), 
-		radius * Math.sin(theta) * Math.sin(phi), radius * Math.cos(theta));
+		radius * Math.sin(theta) * Math.sin(phi), radius * Math.cos(theta));//calculates the position of the viewer
 	modelViewMatrix = lookAt(eye, at, up); //position of the viewer, point the viewer is looking at, which way is up
 	projectionMatrix = perspective(fov, aspect, near, far);
 	
 	gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(modelViewMatrix));
 	gl.uniformMatrix4fv(projectionMatrixLoc, false, flatten(projectionMatrix));
-	
     render();
 };
 function render() {
