@@ -1,11 +1,11 @@
 "use strict"; 
-var near = 0.5;
-var far = 10.0;
-var radius = 4.0;
-var theta = 0; //chnage to 0.3
+var near = 1.0;
+var far = 4.0;
+var radius = 3.0;
+var theta = 0.0; 
 var phi = 0.0;
 var dr = 5.0 * Math.PI / 180.0;
-var fovy = 55.0;
+var fov = 65.0;
 var aspect = 1.0;
 
 var modelViewMatrix, projectionMatrix;
@@ -14,19 +14,10 @@ var eye;
 const at = vec3(0.0, 0.0, 0.0);
 const up = vec3(0.0, 1.0, 0.0);
 
-var xAxis = 0;
-var yAxis = 1;
-var zAxis = 2;
-
-var thetaRot = [0,0,0];
-var thetaLoc;
-
 var canvas;
 var gl;
 var program;
 var objectsArray = [];
-    // initialization of the data arrays!!!!
-
 var idForObjects = 0;
 window.onload = init; // CALL INIT AFTER THE PAGE (all html body) HAS BEEN LOADED!!!!
 
@@ -58,6 +49,7 @@ function moveY(value){
 function moveZ(value){
 	var val = getObject();
 	val.trCoeff[2] = value;
+	console.log("zval" + value);
 }
 
 function rotateX() {
@@ -92,6 +84,42 @@ function scaleZ(value){
 	var val = getObject();
 	val.sc[2] = value;
 }
+
+function zNear(value){ 
+	//from where camera starts to see the scene
+	near = value;
+}
+
+function zFar(value){
+	//the furthest point where the camera can see
+	far = value;
+}
+
+function Radius(value){
+	//how far is the camera from the center of the scene
+	radius = value;
+}
+
+function Theta(value){
+	//moves the camera to left or right
+	theta = value * Math.PI / 180.0;
+}
+
+function Phi(value){
+	//how high or low the camera is from the ground, like goes up or down
+	phi = value * Math.PI / 180.0;
+}
+
+function Fov(value){
+	//how wide you can see the scene
+	fov = value;
+}
+
+function Aspect(value){
+	//width/height
+	aspect = value;
+}
+
 
 function stopRotation() {
 	var val = getObject();
@@ -289,14 +317,15 @@ function init() {
     program = initShaders( gl, "vertex-shader", "fragment-shader" ); // initializing shaders
     gl.useProgram( program );
 	
-	
+	aspect = canvas.width / canvas.height;
+
 	modelViewMatrixLoc = gl.getUniformLocation(program, "modelViewMatrix");
 	projectionMatrixLoc = gl.getUniformLocation(program, "projectionMatrix");
 	
 	eye = vec3(radius * Math.sin(theta) * Math.cos(phi), 
 		radius * Math.sin(theta) * Math.sin(phi), radius * Math.cos(theta));
-	modelViewMatrix = lookAt(eye, at, up);
-	projectionMatrix = perspective(fovy, aspect, near, far);
+	modelViewMatrix = lookAt(eye, at, up); //position of the viewer, point the viewer is looking at, which way is up
+	projectionMatrix = perspective(fov, aspect, near, far);
 	
 	gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(modelViewMatrix));
 	gl.uniformMatrix4fv(projectionMatrixLoc, false, flatten(projectionMatrix));
@@ -306,6 +335,11 @@ function init() {
 function render() {
     gl.clear( gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT); 
 	
+	eye = vec3(radius * Math.sin(theta) * Math.cos(phi), 
+		radius * Math.sin(theta) * Math.sin(phi), radius * Math.cos(theta));
+	modelViewMatrix = lookAt(eye, at, up);
+	projectionMatrix = perspective(fov, aspect, near, far);
+
 	gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(modelViewMatrix));
 	gl.uniformMatrix4fv(projectionMatrixLoc, false, flatten(projectionMatrix));
     for(var i = 0; i < objectsArray.length; i++){

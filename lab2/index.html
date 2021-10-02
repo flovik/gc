@@ -80,191 +80,7 @@
 		<script type="text/javascript" src="MV.js"></script>
 		<script type="text/javascript" src="app.js"></script>
 		
-
-		<!-- css code here-->
-		<!-- padding generates space around element's content inside of its borders-->
-		<!-- margin generates space around element but outside of its borders -->
-		<!-- width and height set the size of the element-->
-		<style>
-			#list {
-				position: absolute;
-				left: 1560px;
-				bottom: 850px;	
-			}
-
-			#scene {
-				position: absolute;
-				left: 1500px;
-				bottom: 850px;
-				
-			}
-
-			#cube {
-				position: absolute;
-				left: 850px;
-				bottom: 850px;
-				width: 90px;
-				height: 30px;
-				margin: 5px;
-			}
-
-			#cone {
-				position: absolute;
-				left: 950px;
-				bottom: 850px;
-				width: 90px;
-				height: 30px;
-				margin: 5px;
-			}
-
-			#delete {
-				padding: 0;
-				position: absolute;
-				left: 1730px;
-				bottom: 840px;
-				width: 90px;
-				height: 30px;
-				
-			}
-
-			#moveX {
-				position: absolute;
-				left: 880px;
-				bottom: 800px;
-				width: 90px;
-				height: 30px;
-				margin: 5px;
-			}
-
-			#moveY {
-				position: absolute;
-				left: 880px;
-				bottom: 770px;
-				width: 90px;
-				height: 30px;
-				margin: 5px;
-			}
-
-			#moveZ {
-				position: absolute;
-				left: 880px;
-				bottom: 740px;
-				width: 90px;
-				height: 30px;
-				margin: 5px;
-			}
-			
-			#moveX_text{
-				position: absolute;
-				left: 820px;
-				bottom: 806px;
-				margin: 5px;
-			}
-
-			#moveY_text {
-				position: absolute;
-				left: 820px;
-				bottom: 776px;
-				margin: 5px;
-			}
-
-			#moveZ_text {
-				position: absolute;
-				left: 820px;
-				bottom: 746px;
-				margin: 5px;
-			}
-
-			#pyramid {
-				padding: 0;
-				position: absolute;
-				left: 1050px;
-				bottom: 850px;
-				width: 90px;
-				height: 30px;
-				margin: 5px;
-			}
-
-			#rotateX {
-				position: absolute;
-				left: 1010px;
-				bottom: 800px;
-				width: 90px;
-				height: 30px;
-				margin: 5px;
-			}
-			#rotateY {
-				position: absolute;
-				left: 1010px;
-				bottom: 760px;
-				width: 90px;
-				height: 30px;
-				margin: 5px;
-			}
-			#rotateZ {
-				position: absolute;
-				left: 1010px;
-				bottom: 720px;
-				width: 90px;
-				height: 30px;
-				margin: 5px;
-			}
-
-			#stopRotation {
-				padding: 0;
-				position: absolute;
-				left: 1010px;
-				bottom: 680px;
-				width: 90px;
-				height: 30px;
-				margin: 5px;
-			}
-			#scaleX {
-				position: absolute;
-				left: 1210px;
-				bottom: 800px;
-				width: 90px;
-				height: 30px;
-				margin: 5px;
-			}
-			#scaleY {
-				position: absolute;
-				left: 1210px;
-				bottom: 770px;
-				width: 90px;
-				height: 30px;
-				margin: 5px;
-			}
-			#scaleZ {
-				position: absolute;
-				left: 1210px;
-				bottom: 740px;
-				width: 90px;
-				height: 30px;
-				margin: 5px;
-			}
-
-			#scaleX_text{
-				position: absolute;
-				left: 1150px;
-				bottom: 806px;
-				margin: 5px;
-			}
-			#scaleY_text{
-				position: absolute;
-				left: 1150px;
-				bottom: 776px;
-				margin: 5px;
-			}
-			#scaleZ_text{
-				position: absolute;
-				left: 1150px;
-				bottom: 746px;
-				margin: 5px;
-			}
-
-
-		</style>
+		<link rel = "stylesheet" href="mystyle.css">
 	</head>
 
 	<body>
@@ -279,9 +95,9 @@
 		<button id="pyramid" name="pyramid" type="button" onclick="addPyramid();">Add pyramid</button>
 		<button id="delete" name = "delete" type = "button" onclick = "deleteOption();">Delete object</button>
 		<!-- value of range slider is passed into the function, where it is used to change the position of vertices-->
-		<input type="range" min="-3" max="3" value="0" step="0.05" class="slider" id="moveX" onchange="moveX(this.value);">
-		<input type="range" min="-3" max="3" value="0" step="0.05" class="slider" id="moveY" onchange="moveY(this.value);">
-		<input type="range" min="-3" max="3" value="0" step="0.05" class="slider" id="moveZ" onchange="moveZ(this.value);">
+		<input type="range" min="-3" max="3" value="0" step="0.1" class="slider" id="moveX" onchange="moveX(this.value);">
+		<input type="range" min="-3" max="3" value="0" step="0.1" class="slider" id="moveY" onchange="moveY(this.value);">
+		<input type="range" min="-3" max="3" value="0" step="0.1" class="slider" id="moveZ" onchange="moveZ(this.value);">
 		<button id="rotateX" name="rotateX" type="button" onclick="rotateX();">Rotate X</button>
 		<button id="rotateY" name="rotateY" type="button" onclick="rotateY();">Rotate Y</button>
 		<button id="rotateZ" name="rotateZ" type="button" onclick="rotateZ();">Rotate Z</button>
@@ -289,6 +105,29 @@
 		<input type="range" min="0.1" max="3" value="0.5" step="0.02" class="slider" id="scaleX" onchange="scaleX(this.value);">
 		<input type="range" min="0.1" max="3" value="0.5" step="0.02" class="slider" id="scaleY" onchange="scaleY(this.value);">
 		<input type="range" min="0.1" max="3" value="0.5" step="0.02" class="slider" id="scaleZ" onchange="scaleZ(this.value);">
+
+
+		<input type="range" min="0.01" max="3" value="1" step="0.01" class="slider" id="zNear" onchange="zNear(this.value);">
+		<label id="zNearText" for = "zNear">zNear</label>
+		<input type="range" min="3" max="9" value="3" step="3" class="slider" id="zFar" onchange="zFar(this.value);">
+		<label id="zFarText" for = "zFar">zFar</label>
+		
+		<input type="range" min="0.05" max="10" value="3" step="0.1" class="slider" id="radius" onchange="Radius(this.value);">
+		<label id="radiusText" for = "radius">radius</label>
+
+		<input type="range" min="-180" max="180" value="0" step="5" class="slider" id="theta" onchange="Theta(this.value);">
+		<label id="thetaText" for = "theta">theta</label>
+
+		<input type="range" min="-90" max="90" value="0" step="5" class="slider" id="phi" onchange="Phi(this.value);">
+		<label id="phiText" for = "phi">phi</label>
+
+		<input type="range" min="10" max="120" value="65" step="5" class="slider" id="fov" onchange="Fov(this.value);">
+		<label id="fovText" for = "fov">fov</label>
+
+		<input type="range" min="0.5" max="2" value="1" step="0.1" class="slider" id="aspect" onchange="Aspect(this.value);">
+		<label id="aspectText" for = "aspect">aspect</label>
+
+
 		<label id="scene" for="list_elements">Scene: </label>
 		<select name="list_elements" id = "list">scene</select>
 		<p id = "moveX_text">Move X</p>

@@ -1,0 +1,281 @@
+/*
+css code here
+padding generates space around element's content inside of its borders
+margin generates space around element but outside of its borders
+width and height set the size of the element
+*/
+#list {
+    position: absolute;
+    left: 1560px;
+    bottom: 850px;	
+}
+
+#scene {
+    position: absolute;
+    left: 1500px;
+    bottom: 850px;
+    
+}
+
+#cube {
+    position: absolute;
+    left: 850px;
+    bottom: 850px;
+    width: 90px;
+    height: 30px;
+    margin: 5px;
+}
+
+#cone {
+    position: absolute;
+    left: 950px;
+    bottom: 850px;
+    width: 90px;
+    height: 30px;
+    margin: 5px;
+}
+
+#delete {
+    padding: 0;
+    position: absolute;
+    left: 1730px;
+    bottom: 840px;
+    width: 90px;
+    height: 30px;
+    
+}
+
+#moveX {
+    position: absolute;
+    left: 880px;
+    bottom: 800px;
+    width: 90px;
+    height: 30px;
+    margin: 5px;
+}
+
+#moveY {
+    position: absolute;
+    left: 880px;
+    bottom: 770px;
+    width: 90px;
+    height: 30px;
+    margin: 5px;
+}
+
+#moveZ {
+    position: absolute;
+    left: 880px;
+    bottom: 740px;
+    width: 90px;
+    height: 30px;
+    margin: 5px;
+}
+
+#moveX_text{
+    position: absolute;
+    left: 820px;
+    bottom: 806px;
+    margin: 5px;
+}
+
+#moveY_text {
+    position: absolute;
+    left: 820px;
+    bottom: 776px;
+    margin: 5px;
+}
+
+#moveZ_text {
+    position: absolute;
+    left: 820px;
+    bottom: 746px;
+    margin: 5px;
+}
+
+#pyramid {
+    padding: 0;
+    position: absolute;
+    left: 1050px;
+    bottom: 850px;
+    width: 90px;
+    height: 30px;
+    margin: 5px;
+}
+
+#rotateX {
+    position: absolute;
+    left: 1010px;
+    bottom: 800px;
+    width: 90px;
+    height: 30px;
+    margin: 5px;
+}
+#rotateY {
+    position: absolute;
+    left: 1010px;
+    bottom: 760px;
+    width: 90px;
+    height: 30px;
+    margin: 5px;
+}
+#rotateZ {
+    position: absolute;
+    left: 1010px;
+    bottom: 720px;
+    width: 90px;
+    height: 30px;
+    margin: 5px;
+}
+
+#stopRotation {
+    padding: 0;
+    position: absolute;
+    left: 1010px;
+    bottom: 680px;
+    width: 90px;
+    height: 30px;
+    margin: 5px;
+}
+#scaleX {
+    position: absolute;
+    left: 1210px;
+    bottom: 800px;
+    margin: 5px;
+}
+#scaleY {
+    position: absolute;
+    left: 1210px;
+    bottom: 770px;
+    margin: 5px;
+}
+#scaleZ {
+    position: absolute;
+    left: 1210px;
+    bottom: 740px;
+    margin: 5px;
+}
+
+#scaleX_text{
+    position: absolute;
+    left: 1150px;
+    bottom: 806px;
+    margin: 5px;
+}
+#scaleY_text{
+    position: absolute;
+    left: 1150px;
+    bottom: 776px;
+    margin: 5px;
+}
+#scaleZ_text{
+    position: absolute;
+    left: 1150px;
+    bottom: 746px;
+    margin: 5px;
+}
+
+#zFar {
+    position: absolute;
+    left: 850px;
+    bottom: 580px;
+    margin: 5px;
+}
+
+#zNear {
+    position: absolute;
+    left: 990px;
+    bottom: 580px;
+    margin: 5px;
+}
+
+#radius {
+    position: absolute;
+    left: 1130px;
+    bottom: 580px;
+    margin: 5px;
+}
+
+#theta {
+    position: absolute;
+    left: 1270px;
+    bottom: 580px;
+    margin: 5px;
+}
+
+#phi {
+    position: absolute;
+    left: 1410px;
+    bottom: 580px;
+    margin: 5px;
+}
+
+#fov {
+    position: absolute;
+    left: 1550px;
+    bottom: 580px;
+    margin: 5px;
+}
+
+#aspect {
+    position: absolute;
+    left: 1690px;
+    bottom: 580px;
+    margin: 5px;
+}
+
+#zFarText {
+    position: absolute;
+    left: 890px;
+    bottom: 600px;
+    font-size: 22px;
+    margin: 5px;
+}
+
+#zNearText {
+    position: absolute;
+    left: 1030px;
+    bottom: 600px;
+    font-size: 22px;
+    margin: 5px;
+}
+
+#radiusText {
+    position: absolute;
+    left: 1165px;
+    bottom: 600px;
+    font-size: 22px;
+    margin: 5px;
+}
+
+#thetaText {
+    position: absolute;
+    left: 1310px;
+    bottom: 600px;
+    font-size: 22px;
+    margin: 5px;
+}
+
+#phiText {
+    position: absolute;
+    left: 1460px;
+    bottom: 600px;
+    font-size: 22px;
+    margin: 5px;
+}
+
+#fovText {
+    position: absolute;
+    left: 1595px;
+    bottom: 600px;
+    font-size: 22px;
+    margin: 5px;
+}
+
+#aspectText {
+    position: absolute;
+    left: 1724px;
+    bottom: 600px;
+    font-size: 22px;
+    margin: 5px;
+}
