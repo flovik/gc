@@ -401,3 +401,13 @@ width and height set the size of the element
     overflow: hidden;
     margin: 5px;
 }
+
+#cylinder {
+    padding: 0;
+    position: absolute;
+    left: 1150px;
+    bottom: 850px;
+    width: 90px;
+    height: 30px;
+    margin: 5px;
+}

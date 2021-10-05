@@ -268,6 +268,42 @@ function addPyramid() {
 	addElement(); //add the object to the options
 }
 
+function addCylinder() {
+	let CylinderVertices = [];
+	var startAngle = 0;
+	var r = 0.75;
+	while(startAngle < 360) {
+		let point_down1 = (vec3(r * Math.cos(startAngle * Math.PI / 180), 0, r * Math.sin(startAngle * Math.PI / 180)));
+		let point_up1 = (vec3(r * Math.cos(startAngle * Math.PI / 180), 1, r * Math.sin(startAngle * Math.PI / 180)));
+
+		startAngle += 0.5;
+
+		let point_down2 = (vec3(r * Math.cos(startAngle * Math.PI / 180), 0, r * Math.sin(startAngle * Math.PI / 180)));
+		let point_up2 = (vec3(r * Math.cos(startAngle * Math.PI / 180), 1, r * Math.sin(startAngle * Math.PI / 180)));;
+
+		CylinderVertices.push(point_down1); //create base down circle
+		CylinderVertices.push(vec3(0, 0, 0));
+		CylinderVertices.push(point_down2);
+
+		CylinderVertices.push(point_up1); //create base upper circle
+		CylinderVertices.push(vec3(0, 1, 0));
+		CylinderVertices.push(point_up2);
+
+		CylinderVertices.push(point_up1); //walls 
+		CylinderVertices.push(point_down1);
+		CylinderVertices.push(point_down2);
+
+		CylinderVertices.push(point_down2);
+		CylinderVertices.push(point_up1);
+		CylinderVertices.push(point_up2);
+	}
+
+	let name = "Cylinder" + (idForObjects++);
+	var Cylinder = new Drawable(CylinderVertices, program, name);
+	objectsArray.push(Cylinder);
+	addElement();
+}
+
 class Drawable {
 	constructor(vertices, program, name){
 		this.name = name;
