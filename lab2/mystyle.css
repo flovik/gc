@@ -411,3 +411,13 @@ width and height set the size of the element
     height: 30px;
     margin: 5px;
 }
+
+#sphere {
+    padding: 0;
+    position: absolute;
+    left: 1250px;
+    bottom: 850px;
+    width: 90px;
+    height: 30px;
+    margin: 5px;
+}

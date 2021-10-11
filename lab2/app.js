@@ -304,6 +304,47 @@ function addCylinder() {
 	addElement();
 }
 
+function addSphere() {
+	//declare Sphere Vertices as a global array
+	window.SphereVertices = [];
+
+	tetrahedron(5);
+
+	function divideTriangle(a, b, c, count) {
+		if ( count > 0 ) {
+			var ab = normalize(mix(a, b, 0.5), true);
+			var ac = normalize(mix(a, c, 0.5), true);
+			var bc = normalize(mix(b, c, 0.5), true);
+	
+			divideTriangle( a, ab, ac, count - 1 );
+			divideTriangle( ab, b, bc, count - 1 );
+			divideTriangle( bc, c, ac, count - 1 );
+			divideTriangle( ab, bc, ac, count - 1 );
+		}
+		else {
+			SphereVertices.push(a);
+			SphereVertices.push(b);
+			SphereVertices.push(c);
+		}
+	}
+	
+	function tetrahedron(n) {
+		var a = vec4(0.0, 0.0, -1.0, 1);
+		var b = vec4(0.0, 0.942809, 0.333333, 1);
+		var c = vec4(-0.816497, -0.471405, 0.333333, 1);
+		var d = vec4(0.816497, -0.471405, 0.333333, 1);
+		divideTriangle(a, b, c, n);
+		divideTriangle(d, c, b, n);
+		divideTriangle(a, d, b, n);
+		divideTriangle(a, c, d, n);
+	}
+
+	let name = "Sphere" + (idForObjects++);
+	var Sphere = new Drawable(SphereVertices, program, name);
+	objectsArray.push(Sphere);
+	addElement();
+}
+
 class Drawable {
 	constructor(vertices, program, name){
 		this.name = name;
@@ -324,7 +365,10 @@ class Drawable {
 		this.colors = [];
 		var rand_color = vec3(Math.floor(Math.random() * 256) / 256, Math.floor(Math.random() * 256) / 256, Math.floor(Math.random() * 256) / 256);
 		for(i = 0; i < this.vertices.length; i++){
-			this.colors.push(vec4(rand_color, 1.0));
+			if(this.vertices == SphereVertices)
+				this.colors.push(vec4(vec3(Math.random(), Math.random(), Math.random()), 1.0));
+			else
+				this.colors.push(vec4(rand_color, 1.0));
 		}
 		
 		this.trCoeffLoc = gl.getUniformLocation(program, "trCoeff");
@@ -343,8 +387,11 @@ class Drawable {
 		gl.bindBuffer(gl.ARRAY_BUFFER, this.vBuffer);
 		gl.bufferData(gl.ARRAY_BUFFER, flatten(this.vertices), gl.STATIC_DRAW);
         gl.enableVertexAttribArray(this.vAttributeLocation);
-		gl.vertexAttribPointer(this.vAttributeLocation, 3, gl.FLOAT, false, 0, 0);
-		
+		if(this.vertices == SphereVertices)
+			gl.vertexAttribPointer(this.vAttributeLocation, 4, gl.FLOAT, false, 0, 0);
+		else
+			gl.vertexAttribPointer(this.vAttributeLocation, 3, gl.FLOAT, false, 0, 0);
+
 		//color
 		gl.bindBuffer(gl.ARRAY_BUFFER, this.colorBuffer);
 		gl.enableVertexAttribArray(this.cAttributeLocation);
