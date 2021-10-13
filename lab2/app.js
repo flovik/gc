@@ -304,10 +304,9 @@ function addCylinder() {
 	addElement();
 }
 
-function addSphere() {
-	//declare Sphere Vertices as a global array
-	window.SphereVertices = [];
+var SphereVertices = [];
 
+function addSphere() {
 	tetrahedron(5);
 
 	function divideTriangle(a, b, c, count) {
